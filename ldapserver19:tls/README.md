@@ -2,7 +2,7 @@
 
 #### ASIX M11-ASO @isx46410800 Curs 2019-2020
 
-## Creamos una entidad CA propia
+## <u>Creamos una entidad CA propia</u>
 
 ### Genereramos la llave privada en formato PEM
 `[isx46410800@miguel ldapserver19:tls]$ openssl genrsa -out ca-key.pem 1024`
@@ -21,7 +21,7 @@
 -rw-------. 1 isx46410800 isx46410800  887 Apr 11 23:06 ca-key.pem
 ```
 
-## Creamos el certificado del servidor
+## <u>Creamos el certificado del servidor</u>
 
 ### Genereramos la llave privada en formato PEM
 `[isx46410800@miguel ldapserver19:tls]$ openssl genrsa -out server-key.pem 1024`
@@ -77,7 +77,7 @@ extendedKeyUsage = serverAuth,emailProtection
 ![](capturas/foto_7.png)
 
 
-## Ficheros generados
+## <u>Ficheros generados</u>
 ```
 [isx46410800@miguel ldapserver19:tls]$ ll *.pem *.srl 
 -rw-rw-r--. 1 isx46410800 isx46410800 1164 Apr 11 23:14 ca-crt.pem
@@ -88,10 +88,10 @@ extendedKeyUsage = serverAuth,emailProtection
 -rw-------. 1 isx46410800 isx46410800  887 Apr 11 23:07 server-key.pem
 ```
 
-## Dockerfile
+## <u>Dockerfile</u>
 + Hemos añadido el paquete `openssl` para las conexiones seguras y certificados
 
-## Install.sh
+## <u>Install.sh</u>
 + Hemos copiado los certificados y las keys tal y como indicaba la explicación del PDF
 ```
 cp /opt/docker/ca.conf /etc/openldap/certs/.
@@ -103,8 +103,9 @@ cp /opt/docker/server-csr.pem /etc/openldap/certs/.
 cp /opt/docker/server-key.pem /etc/openldap/certs/.
 ```
 
-## slapd.conf
+## <u>slapd.conf<u>
 + Hemos configurado este archivo del server para aceptar conexiones seguras
+
 ```
 # Allow LDAPv2 client connections.  This is NOT the default.
 allow bind_v2
@@ -118,7 +119,7 @@ TLSCipherSuite HIGH:MEDIUM:LOW:+SSLv2
 #argsfile       /var/run/openldap/slapd.args
 ```
 
-## ldap.conf (el cliente docker y en cliente de fuera local)
+## <u>ldap.conf (el cliente docker y en cliente de fuera local)</u>
 + Hemos configurado este archivo cliente para realizar consultas ldap seguras
 ```
 #TLS_CACERTDIR  /etc/openldap/certs
@@ -132,7 +133,7 @@ BASE dc=edt,dc=org
 ```
 > Nota: en el cliente de fuera del docker ponemos tambien: `TLS_REQCERT allow`
 
-## startup.sh
+## <u>startup.sh</u>
 + Configuramos para poder encender el servicio y nos funcione para ldap y ldaps con la opcion __-h__
 ```
 #! /bin/bash
@@ -141,7 +142,7 @@ ulimit -n 1024
 /sbin/slapd -d0 -h "ldap:/// ldaps:///" 
 ```
 
-## DOCKER
+## <u>DOCKER<u>
 + Construimos imagen:
 `[isx46410800@miguel ldapserver19:tls]$ docker build -t isx46410800/ldapserver19:tls .`
 
@@ -157,10 +158,10 @@ ulimit -n 1024
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                                        NAMES
 30e910f12456        isx46410800/ldapserver19:tls   "/bin/sh -c /opt/doc…"   4 seconds ago       Up 2 seconds        0.0.0.0:389->389/tcp, 0.0.0.0:636->636/tcp   ldap.edt.org
 ```
-## Fichero /etc/hosts en los clientes
+## <u>Fichero /etc/hosts en los clientes</u>
 + Añadimos: `172.17.0.2 ldap.edt.org`
 
-## COMPROBAMOS CONEXIONES
+## <u>COMPROBAMOS CONEXIONES</u>
 + Consulta TSL/SSL:
 `[isx46410800@miguel ldapserver19:tls]$ ldapsearch -x -LLL -ZZ -b 'dc=edt,dc=org' -h ldap.edt.org dn`
 
