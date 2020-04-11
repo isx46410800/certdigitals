@@ -1,0 +1,287 @@
+dn: dc=edt,dc=org
+dc: edt
+description: Escola del treball de Barcelona
+objectClass: dcObject
+objectClass: organization
+o: edt.org
+
+dn: ou=grups,dc=edt,dc=org
+ou: groups
+description: grup de l'escola edt.org
+objectclass: organizationalunit
+
+dn: cn=1asix,ou=grups,dc=edt,dc=org
+cn: 1asix
+gidNumber: 600
+description: Grup de 1asix
+memberUid: user01
+memberUid: user02
+memberUid: user03
+objectclass: posixGroup
+
+dn: cn=2asix,ou=grups,dc=edt,dc=org
+cn: 2asix
+gidNumber: 610
+description: Grup de 2asix
+memberUid: user04
+memberUid: user05
+memberUid: user06
+objectclass: posixGroup
+
+dn: cn=2dam,ou=grups,dc=edt,dc=org
+cn: 2dam
+gidNumber: 620
+description: Grup de 2dam
+memberUid: user07
+memberUid: user08
+memberUid: user09
+objectclass: posixGroup
+
+dn: cn=users,ou=grups,dc=edt,dc=org
+cn: users
+gidNumber: 630
+description: Grup de users
+memberUid: pere
+memberUid: marta
+memberUid: jordi
+objectclass: posixGroup
+
+dn: cn=user01,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user01
+sn: alumne01
+homephone: 555-222-0001
+mail: user01@edt.org
+description: alumne de 1asix
+ou: 1asix
+uid: user01
+uidNumber: 7001
+gidNumber: 600
+homeDirectory: /tmp/home/1asix/user01
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user02,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user02
+sn: alumne02
+homephone: 555-222-0002
+mail: user02@edt.org
+description: alumne de 1asix
+ou: 1asix
+uid: user02
+uidNumber: 7002
+gidNumber: 600
+homeDirectory: /tmp/home/1asix/user02
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user03,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user03
+sn: alumne03
+homephone: 555-222-0003
+mail: user03@edt.org
+description: alumne de 1asix
+ou: 1asix
+uid: user03
+uidNumber: 7003
+gidNumber: 600
+homeDirectory: /tmp/home/1asix/user03
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user04,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user04
+sn: alumne04
+homephone: 555-222-0004
+mail: user04@edt.org
+description: alumne de 2asix
+ou: 2asix
+uid: user04
+uidNumber: 7004
+gidNumber: 610
+homeDirectory: /tmp/home/2asix/user04
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user05,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user05
+sn: alumne05
+homephone: 555-222-0005
+mail: user05@edt.org
+description: alumne de 2asix
+ou: 2asix
+uid: user05
+uidNumber: 7005
+gidNumber: 610
+homeDirectory: /tmp/home/2asix/user05
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user06,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user06
+sn: alumne06
+homephone: 555-222-0006
+mail: user06@edt.org
+description: alumne de 2asix
+ou: 2asix
+uid: user06
+uidNumber: 7006
+gidNumber: 610
+homeDirectory: /tmp/home/2asix/user06
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user07,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user07
+sn: alumne07
+homephone: 555-222-0007
+mail: user07@edt.org
+description: alumne de 2dam
+ou: 2dam
+uid: user07
+uidNumber: 7007
+gidNumber: 620
+homeDirectory: /tmp/home/2dam/user07
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user08,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user08
+sn: alumne08
+homephone: 555-222-0008
+mail: user08@edt.org
+description: alumne de 2dam
+ou: 2dam
+uid: user08
+uidNumber: 7008
+gidNumber: 620
+homeDirectory: /tmp/home/2dam/user08
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=user09,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: user09
+sn: alumne09
+homephone: 555-222-0009
+mail: user09@edt.org
+description: alumne de 2dam
+ou: 2dam
+uid: user09
+uidNumber: 7009
+gidNumber: 620
+homeDirectory: /tmp/home/2dam/user09
+userPassword: {SHA}ovf8ta/reYP/u2zj0afpHt8yE1A=
+
+dn: cn=pere,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: pere
+sn: pere
+homephone: 555-222-0009
+mail: pere@edt.org
+description: alumne de users
+ou: users
+uid: pere
+uidNumber: 7010
+gidNumber: 630
+homeDirectory: /tmp/home/users/pere
+userPassword: pere
+
+dn: cn=marta,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: marta
+sn: marta
+homephone: 555-222-0009
+mail: marta@edt.org
+description: alumne de users
+ou: users
+uid: marta
+uidNumber: 7011
+gidNumber: 630
+homeDirectory: /tmp/home/users/marta
+userPassword: marta
+
+dn: cn=jordi,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: jordi
+sn: jordi
+homephone: 555-222-0009
+mail: jordi@edt.org
+description: alumne de users
+ou: users
+uid: jordi
+uidNumber: 7011
+gidNumber: 630
+homeDirectory: /tmp/home/users/jordi
+userPassword: jordi
+
+dn: cn=pau,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: pau
+sn: pau
+homephone: 555-222-0009
+mail: pau@edt.org
+description: alumne de users
+ou: users
+uid: pau
+uidNumber: 7012
+gidNumber: 630
+homeDirectory: /tmp/home/users/pau
+userPassword: pau
+
+dn: cn=anna,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: anna
+sn: anna
+homephone: 555-222-0009
+mail: anna@edt.org
+description: alumne de users
+ou: users
+uid: anna
+uidNumber: 7013
+gidNumber: 630
+homeDirectory: /tmp/home/users/anna
+userPassword: anna
+
+dn: cn=julia,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: julia
+sn: julia
+homephone: 555-222-0009
+mail: julia@edt.org
+description: alumne de users
+ou: users
+uid: julia
+uidNumber: 7014
+gidNumber: 630
+homeDirectory: /tmp/home/users/julia
+userPassword: julia
+
+dn: cn=admin,ou=grups,dc=edt,dc=org
+objectclass: posixAccount
+objectclass: inetOrgPerson
+cn: admin
+sn: admin
+homephone: 555-222-0009
+mail: admin@edt.org
+description: alumne de users
+ou: users
+uid: admin
+uidNumber: 7015
+gidNumber: 630
+homeDirectory: /tmp/home/users/admin
+userPassword: admin
