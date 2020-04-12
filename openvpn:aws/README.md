@@ -113,9 +113,9 @@ ac134e1b23df        isx46410800/net19:nethost   "/opt/docker/startup…"   39 se
 + IPs:
 ```
 PC: 192.168.1.41
-NET1: 172.19.0.2/16
-NET2: 172.19.0.3/16
-NET3: 172.19.0.4/16
+NET1: 172.21.0.2/16
+NET2: 172.21.0.3/16
+NET3: 172.21.0.4/16
 PORTATIL: 192.168.1.43
 ```
 + En cada host ejecutamos los siguientes comandos para poder establecer las conexiones:
@@ -129,14 +129,14 @@ PORTATIL: 192.168.1.43
 [isx46410800@miguel openvpn:aws]$ sudo openvpn --remote 192.168.1.43 --dev tun1 --ifconfig 10.4.0.1 10.4.0.2 --tls-client --ca ca-crt.pem --cert client1crt-vpn.pem --key client1key-vpn.pem --reneg-sec 60
 ```
 
-![](capturas/foto_16.png)
+![](capturas/Foto_16.png)
 
     - Enrutamiento:
 ```
 [root@miguel openvpn]# route add -net 10.0.1.0 netmask 255.255.255.0 gw 10.4.0.2
 ```
 
-![](capturas/foto_17.png)
+![](capturas/Foto_17.png)
 
 `server`
     - Orden:
@@ -144,27 +144,29 @@ PORTATIL: 192.168.1.43
 [root@miguel-fedora keys]# openvpn --remote 192.168.1.41 --dev tun1 --ifconfig 10.4.0.2 10.4.0.1 --tls-server --dh dh2048.pem --ca ca-crt.pem --cert servercrt-vpn.pem --key serverkey-vpn.pem --reneg-sec 60
 ```
 
-![](capturas/foto_18.png)
+![](capturas/Foto_18.png)
 
     - Enrutamiento:
 ```
 [root@miguel-fedora ~]# route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.4.0.1
 ```
 
-![](capturas/foto_19.png)
+![](capturas/Foto_19.png)
 
 
 + `Comprobaciones`:
 
     - Por un lado lo ponemos escuchar por el puerto 60000 y por el otro con un telnet para comprobar que haya conexión por este tunel de openvpn:
 
-![](capturas/foto_20.png)
+![](capturas/Foto_20.png)
 
-![](capturas/foto_21.png)
+![](capturas/Foto_21.png)
 
     - Hacemos PING para comprobar también conexión:
 
-![](capturas/foto_22.png)
+![](capturas/Foto_22.png)
 
-![](capturas/foto_23.png)
+![](capturas/Foto_23.png)
+
+![](capturas/Foto_24.png)
 
