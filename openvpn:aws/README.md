@@ -1,3 +1,10 @@
+# **Índice**
+1. [EJEMPLOS 3 Y 4 DE OPENVPN CON CERTIFICADOS PROPIOS](#id1)
+  1.1 [Exemple 3: Túnel Host to Host](#id11)
+  1.2 [Exemple 4: Túnel Network to Network](#id12)
+2. [OPENVPN EN AWS](#id2)
+
+<a name="id1"></a>
 # EJEMPLOS 3 Y 4 DE OPENVPN CON CERTIFICADOS PROPIOS
 
 ## Partimos con que ya tenemos generados los certificados y key de la CA `Veritat Absoluta`
@@ -68,7 +75,8 @@ authorityKeyIdentifier = keyid,issuer:always
 
 ![](capturas/foto_9.png)
 
-## Exemple 3: Túnel Host to Host [ TLS Public/Secret Key ]
+<a name="id12"></a>
+## Exemple 3: Túnel Host to Host
 + En este ejemplo utilizo dos hosts de mi casa, un pc y un portatil. El PC es el servidor y el portátil es el cliente1.
 
 + Escribimos en el PC la orden openvpn con certificados como `servidor`:
@@ -97,6 +105,7 @@ authorityKeyIdentifier = keyid,issuer:always
 
 ![](capturas/foto_15.png)
 
+<a name="id12"></a>
 ## Exemple 4: Túnel Network to Network
 
 + En este caso tenemos dos ordenadores en casa, un pc como cliente con tres containers en una red `mynet` y un ordenador portátil que en este caso será como el server. Ambos hosts tienen sus certificados propios.
@@ -174,3 +183,5 @@ PORTATIL: 192.168.1.43
 
 ![](capturas/Foto_24.png)
 
+<a name="id2"></a>
+## OPENVPN EN AWS
