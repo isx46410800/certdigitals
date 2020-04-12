@@ -123,30 +123,34 @@ PORTATIL: 192.168.1.43
 `iptables -A FORWARD -i tun+ -j ACCEPT`
 
 + Añadimos la rutas de las redes con su máscara y gateway para poder enrutar el tráfico de una red a otra red con subredes:
-`cliente1`
+
+`CLIENTE1`  
     - Orden:
 ```
 [isx46410800@miguel openvpn:aws]$ sudo openvpn --remote 192.168.1.43 --dev tun1 --ifconfig 10.4.0.1 10.4.0.2 --tls-client --ca ca-crt.pem --cert client1crt-vpn.pem --key client1key-vpn.pem --reneg-sec 60
 ```
 
-![](capturas/Foto_16.png)
+![](capturas/Foto_16.png)  
 
     - Enrutamiento:
+
 ```
 [root@miguel openvpn]# route add -net 10.0.1.0 netmask 255.255.255.0 gw 10.4.0.2
 ```
 
 ![](capturas/Foto_17.png)
 
-`server`
+`SERVER`  
+
     - Orden:
 ```
 [root@miguel-fedora keys]# openvpn --remote 192.168.1.41 --dev tun1 --ifconfig 10.4.0.2 10.4.0.1 --tls-server --dh dh2048.pem --ca ca-crt.pem --cert servercrt-vpn.pem --key serverkey-vpn.pem --reneg-sec 60
 ```
 
-![](capturas/Foto_18.png)
+![](capturas/Foto_18.png)  
 
     - Enrutamiento:
+
 ```
 [root@miguel-fedora ~]# route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.4.0.1
 ```
@@ -154,13 +158,13 @@ PORTATIL: 192.168.1.43
 ![](capturas/Foto_19.png)
 
 
-+ `Comprobaciones`:
++ `COMPROBACIONES`:
 
     - Por un lado lo ponemos escuchar por el puerto 60000 y por el otro con un telnet para comprobar que haya conexión por este tunel de openvpn:
 
-![](capturas/Foto_20.png)
+![](capturas/Foto_20.png)  
 
-![](capturas/Foto_21.png)
+![](capturas/Foto_21.png)  
 
     - Hacemos PING para comprobar también conexión:
 
