@@ -1,8 +1,8 @@
 # **Índice**
-1. [EJEMPLOS 3 Y 4 DE OPENVPN CON CERTIFICADOS PROPIOS](#id1)
-  1.1 [Exemple 3: Túnel Host to Host](#id11)
-  1.2 [Exemple 4: Túnel Network to Network](#id12)
-2. [OPENVPN EN AWS](#id2)
+1. [EJEMPLOS 3 Y 4 DE OPENVPN CON CERTIFICADOS PROPIOS](#id1)  
+  1.1 [Exemple 3: Túnel Host to Host](#id11)  
+  1.2 [Exemple 4: Túnel Network to Network](#id12)  
+2. [OPENVPN EN AWS](#id2)  
 
 <a name="id1"></a>
 # EJEMPLOS 3 Y 4 DE OPENVPN CON CERTIFICADOS PROPIOS
