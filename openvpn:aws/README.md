@@ -75,7 +75,7 @@ authorityKeyIdentifier = keyid,issuer:always
 
 ![](capturas/foto_9.png)
 
-<a name="id12"></a>
+<a name="id11"></a>
 ## Exemple 3: Túnel Host to Host
 + En este ejemplo utilizo dos hosts de mi casa, un pc y un portatil. El PC es el servidor y el portátil es el cliente1.
 
