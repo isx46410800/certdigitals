@@ -78,7 +78,7 @@ authorityKeyIdentifier = keyid,issuer:always
 
 + Vemos la interfaz `tun1` creada por el tunel VPN:
 
-![](capturas/foto_11.png)
+![](capturas/foto-11.png)
 
 + Escribimos en el portatil la orden openvpn con certificados como `cliente1`:
 `[root@miguel-fedora keys]# openvpn --remote 192.168.1.41 --dev tun1 --ifconfig 10.4.0.2 10.4.0.1 --tls-client --ca ca-crt.pem --cert client1crt-vpn.pem --key client1key-vpn.pem --reneg-sec 60`
