@@ -99,4 +99,72 @@ authorityKeyIdentifier = keyid,issuer:always
 
 ## Exemple 4: Túnel Network to Network
 
++ En este caso tenemos dos ordenadores en casa, un pc como cliente con tres containers en una red `mynet` y un ordenador portátil que en este caso será como el server. Ambos hosts tienen sus certificados propios.
+```
+[isx46410800@miguel openvpn:aws]$ docker run --rm --name net1 -h net1 --net mynet -d isx46410800/net19:nethost
+[isx46410800@miguel openvpn:aws]$ docker run --rm --name net2 -h net2 --net mynet -d isx46410800/net19:nethost
+[isx46410800@miguel openvpn:aws]$ docker run --rm --name net3 -h net3 --net mynet -d isx46410800/net19:nethost
+[isx46410800@miguel openvpn:aws]$ docker ps
+CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS               NAMES
+d324ba5c348d        isx46410800/net19:nethost   "/opt/docker/startup…"   8 seconds ago       Up 6 seconds                            net3
+a3c59a21a488        isx46410800/net19:nethost   "/opt/docker/startup…"   27 seconds ago      Up 24 seconds                           net2
+ac134e1b23df        isx46410800/net19:nethost   "/opt/docker/startup…"   39 seconds ago      Up 36 seconds                           net1
+```
++ IPs:
+```
+PC: 192.168.1.41
+NET1: 172.19.0.2/16
+NET2: 172.19.0.3/16
+NET3: 172.19.0.4/16
+PORTATIL: 192.168.1.43
+```
++ En cada host ejecutamos los siguientes comandos para poder establecer las conexiones:
+`echo 1 > /proc/sys/net/ipv4/ip_forward`
+`iptables -A FORWARD -i tun+ -j ACCEPT`
+
++ Añadimos la rutas de las redes con su máscara y gateway para poder enrutar el tráfico de una red a otra red con subredes:
+`cliente1`
+    - Orden:
+```
+[isx46410800@miguel openvpn:aws]$ sudo openvpn --remote 192.168.1.43 --dev tun1 --ifconfig 10.4.0.1 10.4.0.2 --tls-client --ca ca-crt.pem --cert client1crt-vpn.pem --key client1key-vpn.pem --reneg-sec 60
+```
+
+![](capturas/foto_16.png)
+
+    - Enrutamiento:
+```
+[root@miguel openvpn]# route add -net 10.0.1.0 netmask 255.255.255.0 gw 10.4.0.2
+```
+
+![](capturas/foto_17.png)
+
+`server`
+    - Orden:
+```
+[root@miguel-fedora keys]# openvpn --remote 192.168.1.41 --dev tun1 --ifconfig 10.4.0.2 10.4.0.1 --tls-server --dh dh2048.pem --ca ca-crt.pem --cert servercrt-vpn.pem --key serverkey-vpn.pem --reneg-sec 60
+```
+
+![](capturas/foto_18.png)
+
+    - Enrutamiento:
+```
+[root@miguel-fedora ~]# route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.4.0.1
+```
+
+![](capturas/foto_19.png)
+
+
++ `Comprobaciones`:
+
+    - Por un lado lo ponemos escuchar por el puerto 60000 y por el otro con un telnet para comprobar que haya conexión por este tunel de openvpn:
+
+![](capturas/foto_20.png)
+
+![](capturas/foto_21.png)
+
+    - Hacemos PING para comprobar también conexión:
+
+![](capturas/foto_22.png)
+
+![](capturas/foto_23.png)
 
