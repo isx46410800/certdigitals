@@ -185,9 +185,13 @@ PORTATIL: 192.168.1.43
 
 <a name="id2"></a>
 ## OPENVPN EN AWS
+
+`SERVER`  
+
 + Nos conectamos en una AWS de amazon con el siguiente Security Group
 
-+ Configuramos el host de AWS como el servidor con un servicio server con systemctl:
++ Configuramos el host de AWS como el servidor con un servicio server con systemctl:  
+
 `[fedora@ip-172-31-30-234 openvpn]$ cat /etc/systemd/system/openvpn-server\@.service`  
 
 ```
@@ -236,7 +240,7 @@ comp-lzo
 
 `[fedora@ip-172-31-30-234 openvpn]$ sudo systemctl status openvpn-server@server.service`  
 
-![](capturas/Foto_24.png)
+![](capturas/Foto_25.png)
 
 + Comprobamos el tunel:
 
@@ -244,11 +248,11 @@ comp-lzo
 
 `[fedora@ip-172-31-30-234 ~]$ ip a s dev tun0`  
 
-![](capturas/Foto_25.png)
+![](capturas/Foto_26.png)
 
 + Configuramos los clientes del servicio de openvpn cliente:  
 
-`cliente1`
+`CLIENTE1`
 
 `[root@miguel ~]# cat /lib/systemd/system/openvpn-client@.service`  
 
@@ -302,7 +306,7 @@ remote 18.132.37.74 1194
 
 + Configuramos los clientes del servicio de openvpn cliente:  
 
-`cliente2`  
+`CLIENTE2`  
 
 `[root@miguel-fedora openvpn]# cat /lib/systemd/system/openvpn-client@.service`  
 
@@ -346,7 +350,7 @@ remote 18.132.37.74 1194
 [root@miguel-fedora openvpn]# systemctl status openvpn-client@client.service
 ```
 
-![](capturas/Foto_24.png)
+![](capturas/Foto_29.png)
 
 + Comprobamos el tunel:
 
@@ -354,5 +358,5 @@ remote 18.132.37.74 1194
 
 `[root@miguel-fedora openvpn]$ ip a s dev tun0`
 
-![](capturas/Foto_25.png)
+![](capturas/Foto_30.png)
 
