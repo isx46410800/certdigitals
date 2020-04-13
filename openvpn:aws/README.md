@@ -185,3 +185,174 @@ PORTATIL: 192.168.1.43
 
 <a name="id2"></a>
 ## OPENVPN EN AWS
++ Nos conectamos en una AWS de amazon con el siguiente Security Group
+
++ Configuramos el host de AWS como el servidor con un servicio server con systemctl:
+`[fedora@ip-172-31-30-234 openvpn]$ cat /etc/systemd/system/openvpn-server\@.service`  
+
+```
+[Unit]
+Description=OpenVPN service for %I hisx
+After=syslog.target network-online.target
+
+[Service]
+Type=forking
+PrivateTmp=true
+ExecStartPre=/usr/bin/echo serveri %i %I
+PIDFile=/var/run/openvpn-server/%i.pid
+ExecStart=/usr/sbin/openvpn --daemon --writepid /var/run/openvpn-server/%i.pid --cd /etc/openvpn/ --config %i.conf
+
+[Install]
+WantedBy=multi-user.target
+```
+
+`[fedora@ip-172-31-30-234 system]$ sudo cp /lib/systemd/system/openvpn-server@.service /etc/systemd/system/.`  
+
+`[fedora@ip-172-31-30-234 openvpn]$ sudo cp sample.server.conf server.conf`  
+
++ Algunos aspectos configurados:  
+`[fedora@ip-172-31-30-234 openvpn]$ sudo vim server.conf`  
+```
+ca /etc/openvpn/keys/ca-crt.pem
+cert /etc/openvpn/keys/servercrt-vpn.pem
+key /etc/openvpn/keys/serverkey-vpn.pem # This file should be kept secret
+# Diffie hellman parameters.
+# Generate your own with:
+# openssl dhparam -out dh2048.pem 2048
+dh /etc/openvpn/keys/dh2048.pem
+...
+comp-lzo
+...
+#explicit-exit-notify 1
+```
+
+`[fedora@ip-172-31-30-234 openvpn]$ sudo chmod 600 keys/serverkey-vpn.pem`  
+
++ Encendemos el servicio:
+
+`[fedora@ip-172-31-30-234 openvpn]$ sudo systemctl daemon-reload`  
+
+`[fedora@ip-172-31-30-234 openvpn]$ sudo systemctl start openvpn-server@server.service`  
+
+`[fedora@ip-172-31-30-234 openvpn]$ sudo systemctl status openvpn-server@server.service`  
+
+![](capturas/Foto_24.png)
+
++ Comprobamos el tunel:
+
+`[fedora@ip-172-31-30-234 ~]$ ip r`  
+
+`[fedora@ip-172-31-30-234 ~]$ ip a s dev tun0`  
+
+![](capturas/Foto_25.png)
+
++ Configuramos los clientes del servicio de openvpn cliente:  
+
+`cliente1`
+
+`[root@miguel ~]# cat /lib/systemd/system/openvpn-client@.service`  
+
+```
+[Unit]
+Description=OpenVPN service for %I hisx
+After=network-online.target
+
+[Service]
+Type=forking
+PrivateTmp=true
+PIDFile=/var/run/openvpn-client/%i.pid
+ExecStartPre=/usr/bin/echo servei %i %I
+ExecStart=/usr/sbin/openvpn --daemon --writepid /var/run/openvpn-client/%i.pid --cd /etc/openvpn/ --config %i.conf
+
+[Install]
+WantedBy=multi-user.target
+```
+
+`[root@miguel ~]# cp /lib/systemd/system/openvpn-client@.service /etc/systemd/system/.`  
+`[root@miguel ~]# vim /etc/openvpn/client.conf`  
+
++ Algunos aspectos configurados:  
+
+```
+ca /etc/openvpn/keys/ca-crt.pem
+cert /etc/openvpn/keys/client1crt-vpn.pem
+key /etc/openvpn/keys/client1key-vpn.pem
+...
+comp-lzo
+...
+remote 18.132.37.74 1194
+...
+```
+
++ Encendemos el servicio:
+```
+[root@miguel openvpn]# systemctl daemon-reload
+[root@miguel openvpn]# systemctl start openvpn-client@client.service
+[root@miguel openvpn]# systemctl status openvpn-client@client.service
+```
+![](capturas/Foto_27.png)
+
++ Comprobamos el tunel:
+
+`[root@miguel openvpn]# ip a s dev tun0`  
+
+`[root@miguel openvpn]# ip r`  
+
+![](capturas/Foto_28.png)
+
++ Configuramos los clientes del servicio de openvpn cliente:  
+
+`cliente2`  
+
+`[root@miguel-fedora openvpn]# cat /lib/systemd/system/openvpn-client@.service`  
+
+```
+[Unit]
+Description=OpenVPN service for %I hisx
+After=network-online.target
+
+[Service]
+Type=forking
+PrivateTmp=true
+PIDFile=/var/run/openvpn-client/%i.pid
+ExecStartPre=/usr/bin/echo servei %i %I
+ExecStart=/usr/sbin/openvpn --daemon --writepid /var/run/openvpn-client/%i.pid --cd /etc/openvpn/ --config %i.conf
+
+[Install]
+WantedBy=multi-user.target
+```  
+
+`[root@miguel-fedora openvpn]# cp /lib/systemd/system/openvpn-client@.service /etc/systemd/system/.`  
+
+`[root@miguel-fedora openvpn]# vim /etc/openvpn/client.conf`  
+
++ Algunos aspectos configurados:
+
+```
+ca /etc/openvpn/keys/ca-crt.pem
+cert /etc/openvpn/keys/client2crt-vpn.pem
+key /etc/openvpn/keys/client2key-vpn.pem
+...
+comp-lzo
+...
+remote 18.132.37.74 1194
+...
+```
+
++ Encendemos el servicio:
+```
+[root@miguel-fedora openvpn]# systemctl daemon-reload
+[root@miguel-fedora openvpn]# systemctl start openvpn-client@client.service
+[root@miguel-fedora openvpn]# systemctl status openvpn-client@client.service
+```
+
+![](capturas/Foto_24.png)
+
++ Comprobamos el tunel:
+
+`[root@miguel-fedora openvpn]$ ip r`
+
+`[root@miguel-fedora openvpn]$ ip a s dev tun0`
+
+![](capturas/Foto_25.png)
+
