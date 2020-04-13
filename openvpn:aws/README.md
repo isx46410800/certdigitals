@@ -188,7 +188,9 @@ PORTATIL: 192.168.1.43
 
 `SERVER`  
 
-+ Nos conectamos en una AWS de amazon con el siguiente Security Group
++ Nos conectamos en una AWS de amazon con el siguiente Security Group:  
+
+![](capturas/Foto_31.png)
 
 + Configuramos el host de AWS como el servidor con un servicio server con systemctl:  
 
@@ -359,4 +361,19 @@ remote 18.132.37.74 1194
 `[root@miguel-fedora openvpn]$ ip a s dev tun0`
 
 ![](capturas/Foto_30.png)
+
+`COMPROBACIONES`
+
++ De SERVER a CLIENTE1:
+
+![](capturas/Foto_32.png)
+
+![](capturas/Foto_33.png)
+
++ DE SERVER A CLIENTE2:
+
+![](capturas/Foto_34.png)
+
+![](capturas/Foto_35.png)
+
 
